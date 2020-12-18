@@ -9,19 +9,13 @@ class Solution:
         for i, p in enumerate(pattern):
             o[p].append(i)
         #print(f'Dict of {pattern}: {o.values()}')
-        return o.values()
-
-    def _match_list_of_list(self, l1: List, l2: List) -> bool:
-        # compare 2 lists of list. It might have a better way...
-        for i, item in enumerate(l1):
-            if sorted(item) != sorted(l2[i]):
-                return False
-        return True
+        return list(o.values())
 
     def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
-        p_list = sorted(self._get_pattern_list(pattern))
-        return [word for word in words
-                if self._match_list_of_list(sorted(self._get_pattern_list(word)), p_list)]
+        p_length = len(pattern)
+        p_list = self._get_pattern_list(pattern)
+        return [word for word in [w for w in words if len(w) == p_length]
+                if self._get_pattern_list(word) == p_list]
 
 
 if __name__ == "__main__":
