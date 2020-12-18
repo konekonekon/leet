@@ -2,6 +2,8 @@ from collections import defaultdict
 from typing import List
 
 class Solution:
+    # idea is to create a dict of list of each character in an input string and its position in the string. Then to get only the positions.
+    # E.g. "mee" => {"m": [0], "e": [1,2]} => [[0], [1,2]]
     def _get_pattern_list(self, pattern: str) -> List[List[int]]:
         o = defaultdict(list)
         for i, p in enumerate(pattern):
@@ -10,6 +12,7 @@ class Solution:
         return o.values()
 
     def _match_list_of_list(self, l1: List, l2: List) -> bool:
+        # compare 2 lists of list. It might have a better way...
         for i, item in enumerate(l1):
             if sorted(item) != sorted(l2[i]):
                 return False
